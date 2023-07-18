@@ -1,7 +1,17 @@
-canvas = document.querySelector("canvas")
-const ctx = canvas.getContext("2d");
+import { Player } from "./clases/Player.js";
+
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = 400;
+canvas.height = 200;
+canvas.style = "background-color: black"
+
+const canvasContainer = document.getElementById('gameCanvas');
+canvasContainer.appendChild(canvas);
 
 
+const player1 = new Player(canvas.width/2, canvas.height/2, 30, 30)
 
 class ball {
     x = canvas.width / 2
@@ -56,24 +66,14 @@ class ball {
     }
 }
 
-pelota = new ball();
-
-pelotas = []
-
-setInterval( ()=>{
-    pelotas.push(new ball())
-}, 700)
-
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    pelotas.forEach(pelota => {
-        pelota.update()
-        pelota.draw()
-    });
+    player1.draw(ctx)
+
     
     requestAnimationFrame(animate); 
 }
 
 
-//animate()
+animate()
